@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+### `clone repository`
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
+### `npm install`
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### `code structure`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The App.js file in this React application is responsible for dynamically modifying the DOM based on configurations specified in YAML files.
 
-### `npm test`
+State Management:
+configFiles: A state variable to store the list of YAML files that need to be loaded based on the current URL.
+Initial Configuration Setup (useEffect #1):
+When the component mounts, it fetches the config-selector.yaml file to determine which YAML files should be loaded based on the current URL.
+The YAML content is parsed into a JavaScript object, and the corresponding YAML files for the URL are stored in the configFiles state.
+Loading and Processing YAML Files (useEffect #2):
+When the configFiles state changes, indicating which YAML files to load, this effect fetches the content of each specified YAML file.
+The YAML files are parsed, combined, and any conflicts between actions are resolved based on their priority.
+Combining and Sorting Configurations (combineConfigs):
+This function takes multiple YAML configurations and combines their actions into a single list.
+The actions are sorted by their priority value, ensuring that higher-priority actions are applied first.
+Applying Configurations to the DOM (applyConfig):
+The combined and sorted actions are applied to the DOM:
+Replace: Replaces existing DOM elements with new ones based on the provided selector.
+Insert: Inserts new elements into the DOM at specified positions relative to target elements.
+Remove: Removes elements from the DOM based on the provided selector.
+Alter: Changes text content within the DOM by replacing occurrences of specified strings.
+Rendering Initial HTML Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `assumptions and limitations`
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The application assumes that YAML files are correctly formatted and follow the expected structure, including valid actions and priority values.
+config-selector.yaml is required and should accurately map URLs to the corresponding YAML configuration files.
+The application currently supports the specified actions (remove, replace, insert, alter) but does not handle more advanced DOM manipulations.
+Error handling for YAML parsing is basic, with no advanced validation.
+The application is designed for a development environment; additional configuration may be necessary for production deployment.

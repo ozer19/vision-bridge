@@ -1,0 +1,21 @@
+actions:
+  - type: remove
+    selector: ".ad-banner"
+  - type: replace
+    priority: 1
+    selector: "#old-header"
+    newElement: "<header id='new-header'>New Header from A.yaml</header>"
+  - type: insert
+    priority: 2
+    position: "after"
+    target: "body"
+    element: "<div class='promo'>Promo from A.yaml</div>"
+  - type: insert
+    priority: 1
+    position: "after"
+    target: "#new-header"
+    element: "<div class='after-header'>After Header Content from A.yaml</div>"
+  - type: alter
+    priority: 1
+    oldValue: "Machine Learning"
+    newValue: "AI"
